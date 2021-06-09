@@ -1,0 +1,58 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Gwp</h4>
+            <p class="card-category">List of gwp</p>
+          </div>
+          <div class="card-body table-responsive">
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Brand" type="text" [(ngModel)]="brand" (keyup.enter)="getGwpList(null)">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Sku" type="text" [(ngModel)]="sku" (keyup.enter)="getGwpList(null)">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Item" type="text" [(ngModel)]="item" (keyup.enter)="getGwpList(null)">
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="getPage($event)" [disabled]="clicked" *ngIf="this.getGwpListResponse.lstViewGwpProduct[0].uuid != undefined"></mat-paginator>
+            <table class="table table-hover" *ngIf="this.getGwpListResponse.lstViewGwpProduct[0].uuid != undefined">
+              <thead class="text-warning">
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Brand</th>
+                  <th scope="col">Sku</th>
+                  <th scope="col">Item</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let viewGwpProduct of getGwpListResponse.lstViewGwpProduct; let i = index">
+                  <td scope="row">{{i + 1 + (pageSize * pageIndex)}}</td>
+                  <td>{{viewGwpProduct.tbbBrand}}</td>
+                  <td>{{viewGwpProduct.tbgSku}}</td>
+                  <td>{{viewGwpProduct.tbpItem}}</td>
+                  <td>
+                    <input type="button" class="btn btn-warning" value="view" [disabled]="clicked" [routerLink]="['/gwp-edit', viewGwpProduct.tbgId]"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="getPage($event)" [disabled]="clicked" *ngIf="this.getGwpListResponse.lstViewGwpProduct[0].uuid != undefined"></mat-paginator>
+            <input type="button" class="btn btn-success pull-right" value="Add" [disabled]="clicked" (click)="GwpAdd();" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Order Pack</h4>
+            <p class="card-category">List of order pack</p>
+          </div>
+          <div class="card-body table-responsive">            
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Brand" type="text" [(ngModel)]="brand" (keyup.enter)="getOrderPackList(null)">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Market" type="text" [(ngModel)]="market" (keyup.enter)="getOrderPackList(null)">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Order No" type="text" [(ngModel)]="orderNo" (keyup.enter)="getOrderPackList(null)">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Name" type="text" [(ngModel)]="name" (keyup.enter)="getOrderPackList(null)">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Hp" type="text" [(ngModel)]="hp" (keyup.enter)="getOrderPackList(null)">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Awb" type="text" [(ngModel)]="awb" (keyup.enter)="getOrderPackList(null)">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>Status</mat-label>
+                  <mat-select [(ngModel)]="status" (selectionChange)="getOrderPackList(null)">
+                    <mat-option value="">
+                      All
+                    </mat-option>
+                    <mat-option value="Ready to Pack">
+                      Ready to Pack
+                    </mat-option>
+                    <mat-option value="Packing">
+                      Packing
+                    </mat-option>
+                    <mat-option value="QC">
+                      QC
+                    </mat-option>
+                    <mat-option value="Packed">
+                      Packed
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="getPage($event)" [disabled]="clicked" *ngIf="this.getOrderPackListResponse.lstViewOrderPack[0].uuid != undefined"></mat-paginator>
+            <table class="table table-hover" *ngIf="this.getOrderPackListResponse.lstViewOrderPack[0].uuid != undefined">
+              <thead class="text-warning">
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Brand</th>
+                  <th scope="col">Market</th>
+                  <th scope="col">Order No</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Hp</th>
+                  <th scope="col">Awb</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let viewOrderPack of getOrderPackListResponse.lstViewOrderPack; let i = index">
+                  <td scope="row">{{i + 1 + (pageSize * pageIndex)}}</td>
+                  <td>{{viewOrderPack.tboBrand}}</td>
+                  <td>{{viewOrderPack.tboMarket}}</td>
+                  <td>{{viewOrderPack.tboOrderNo}}</td>
+                  <td title="{{viewOrderPack.tboName}}">{{viewOrderPack.tboNameShort}}</td>
+                  <td>{{viewOrderPack.tboHp}}</td>
+                  <td>{{viewOrderPack.tboAwb}}</td>
+                  <td>{{viewOrderPack.tboStatus}}</td>
+                  <td>
+                    <input *ngIf="viewOrderPack.tboStatus == 'Ready to Pack' || viewOrderPack.tboStatus == 'Packing'" type="button" class="btn btn-warning" value="Pack" [disabled]="clicked" [routerLink]="['/orderpack-packing', viewOrderPack.tboOrderNo]"/>
+                    <input *ngIf="viewOrderPack.tboStatus == 'QC'" type="button" class="btn btn-warning" value="QC" [disabled]="clicked" [routerLink]="['/orderpack-qc', viewOrderPack.tboOrderNo]"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="getPage($event)" [disabled]="clicked" *ngIf="this.getOrderPackListResponse.lstViewOrderPack[0].uuid != undefined"></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

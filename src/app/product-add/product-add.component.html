@@ -1,0 +1,78 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Product Add</h4>
+            <p class="card-category">Add new Product</p>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-8">                  
+                  <mat-form-field>
+                    <mat-label>Brand</mat-label>
+                    <mat-select [(ngModel)]="postProductAddRequest.tbbBrandId" name="tbbBrandId">
+                        <mat-option *ngFor="let lstTbBrand of getBrandResponse.lstTbBrand" [value]="lstTbBrand.tbbBrandId">
+                            {{lstTbBrand.tbbBrand}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Sku" type="text" [(ngModel)]="postProductAddRequest.tbpSku" name="tbpSku">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Item" type="text" [(ngModel)]="postProductAddRequest.tbpItem" name="tbpItem">
+                  </mat-form-field>
+                </div>
+              </div>              
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Code" type="text" [(ngModel)]="postProductAddRequest.tbpCode" name="tbpCode">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Location" type="text" [(ngModel)]="postProductAddRequest.tbpLoc" name="tbpLoc">
+                  </mat-form-field>
+                </div>
+              </div>              
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Quantity" type="text" [(ngModel)]="postProductAddRequest.tbpQty" name="tbpQty">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Unit Price" type="text" [(ngModel)]="postProductAddRequest.tbpUnitPrice" name="tbpUnitPrice">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <h6 class="text-muted">Type</h6>
+                  <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="Sellable">Sellable</mat-radio-button>
+                    <mat-radio-button value="Gwp">Gwp</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-success pull-right" [disabled]="clicked" (click)="save();">Save</button>
+              <button mat-raised-button type="button" class="btn btn-success pull-right" [disabled]="clicked" (click)="back();">Back</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

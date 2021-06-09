@@ -12,28 +12,17 @@ import { Util } from 'app/util';
 })
 export class AuthService {
   util: Util = new Util();
-  apiUrl = 'http://34.101.132.80:7080/auth';
-  //apiUrl = 'http://localhost:7080/auth';
 
   constructor(private httpClient: HttpClient) { }
 
-  postCheck(authCheckRequest: AuthCheckRequest): Observable<AuthCheckResponse> {
+  postGenerate(authGenerateRequest: AuthGenerateRequest): Observable<AuthGenerateResponse> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
 
-    authCheckRequest.requestId = this.util.randomString(10);
-    authCheckRequest.requestDate = ((new Date(Date.now() - ((new Date()).getTimezoneOffset() * 60000))).toISOString().slice(0, -1)) + '000';
+    authGenerateRequest.userId = 'I816';
+    authGenerateRequest.password = 'eyJpdiI6IjQzK2N6NXpxVTFiTEJ0ajR0WVwva2tnPT0iLCJ2YWx1ZSI6InlyeEU4M1BibHNNTXg1XC9xU3NwS3NBUjBMXC9jdUtwejBQc0hoQU1WdnB0ST0iLCJtYWMiOiIzNDdiY2Q5MGFmZjViNGY0YWVmNDNiNzNkN2EyZmMwYzc0NzdlMjUzODRmMDlkOGM4ZDVlZWVhMGY0MGNlODA0In0=';
+    authGenerateRequest.appid = '148';
 
-    return this.httpClient.post<AuthCheckResponse>(`${this.apiUrl}/postcheck`, authCheckRequest, { headers });
-  }
-
-  postGenerate(authGenerateRequest: AuthGenerateRequest): Observable<AuthGenerateResponse> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');;
-
-    authGenerateRequest.requestId = this.util.randomString(10);
-    authGenerateRequest.requestDate = ((new Date(Date.now() - ((new Date()).getTimezoneOffset() * 60000))).toISOString().slice(0, -1)) + '000';
-
-    return this.httpClient.post<AuthGenerateResponse>(`${this.apiUrl}/postgenerate`, authGenerateRequest, { headers });
+    return this.httpClient.post<AuthGenerateResponse>('http://10.6.226.199:3000/api/login', authGenerateRequest, { headers });
   }
 }

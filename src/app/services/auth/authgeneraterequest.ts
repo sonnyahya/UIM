@@ -1,7 +1,5 @@
 export class AuthGenerateRequest {
-    requestId: string;
-    requestDate: string;
-    tbaEmail: string;
-    tbaIdLogin: string;
-    tbaPassword: string;
+    userId: string;
+    password: string;
+    appid: string;
 }

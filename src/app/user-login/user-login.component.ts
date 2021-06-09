@@ -25,10 +25,7 @@ export class UserLoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('PSM - Login');
     this.setCurrentLocation();
-    this.authGenerateRequest.tbaEmail = 'achmad.amri@gmail.com';
-    this.authGenerateRequest.tbaPassword = '123';
   }
 
   setCurrentLocation() {
@@ -44,8 +41,6 @@ export class UserLoginComponent implements OnInit {
 
   login() {
     this.clicked = !this.clicked;
-
-    this.authGenerateRequest.tbaIdLogin = this.authGenerateRequest.tbaEmail;
 
     this.authService.postGenerate(this.authGenerateRequest)
       .subscribe(
